@@ -3,41 +3,37 @@ from services.fireworks_client import ask_llm
 def investor_agent(idea: str):
 
     prompt = f"""
-You are a senior venture capitalist and startup market analyst.
+You are a senior venture capitalist.
 
-Analyze the following startup idea in depth.
-
-STARTUP IDEA:
+Startup Idea:
 {idea}
 
-Return your analysis in this format:
+IMPORTANT:
 
-# Market Opportunity Score
-Give a score from 0-100 and explain why.
+The FIRST line of your response MUST be exactly:
 
-# Total Addressable Market (TAM)
-Estimate market size and opportunity.
+Fundability Score: <number between 0 and 100>
 
-# Industry Trends
-Current trends supporting or hurting adoption.
+Example:
+Fundability Score: 84
 
-# Customer Demand
-Why customers would pay for this solution.
+DO NOT write anything before this line.
 
-# Growth Potential
-Short-term and long-term growth opportunities.
+Then provide:
 
-# Competitive Landscape
-How crowded is this market.
+## Investment Thesis
 
-# Key Risks
-Top 5 risks founders must consider.
+## VC Attractiveness
 
-# Recommended Next Steps
-Specific actions for validation.
+## Key Risks
 
-Be detailed.
-Use bullet points.
-Write 500-700 words.
+## Funding Recommendation
+
+## Suggested Funding Path
+
+## Investor Summary
+
+Write at least 500 words.
 """
+
     return ask_llm(prompt)
