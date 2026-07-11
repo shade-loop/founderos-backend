@@ -15,26 +15,22 @@ export default function Home() {
     setLoading(true);
 
     try {
-  await new Promise((resolve) => setTimeout(resolve, 2500));
+  const response = await fetch(
+  "https://founderos-backend-2qa0.onrender.com/analyze",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      idea,
+    }),
+  }
+);
 
-  setResult({
-    venture_score: 82,
-    market_score: 88,
-    fundability_score: 76,
-    verdict: "BUILD",
-    synthesis:
-      "FounderOS believes this startup solves a meaningful problem with strong market demand. Competitive differentiation and execution quality will determine success.",
-    market:
-      "Large TAM. Growing demand. Strong expansion potential.",
-    competitor:
-      "Moderate competition. Opportunity exists through specialization.",
-    customer:
-      "Clear customer pain points and willingness to pay.",
-    investor:
-      "Fundable at pre-seed if traction and validation are demonstrated.",
-    strategy:
-      "Launch MVP → Validate users → Improve retention → Raise capital."
-  });
+const data = await response.json();
+
+setResult(data);
 }
 catch (error) {
   console.error(error);
